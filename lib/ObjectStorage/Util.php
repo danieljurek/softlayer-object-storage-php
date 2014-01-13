@@ -22,13 +22,18 @@ class ObjectStorage_Util
     public static function __autoload_objectStorage_client($className)
     {
         $objectStorageDirectory = dirname(dirname(__FILE__));
-        set_include_path(get_include_path() . PATH_SEPARATOR . $objectStorageDirectory);
 
         $directoryChunks = explode('_', $className);
 
-        $path = implode(DIRECTORY_SEPARATOR, $directoryChunks) . '.php';
+        $path = APPPATH . 'third_party/softlayer-storage/' . implode(DIRECTORY_SEPARATOR, $directoryChunks) . '.php';
 
-        require_once($path);
+        // Check that the file exists before ruining the rest of the scripts with cascading exceptions 
+        if(file_exists($path)) {
+          require_once($path);
+          return true; 
+        } else { 
+          return false; 
+        }
     }
 
     public static function getMimeByName($fileName = '')
