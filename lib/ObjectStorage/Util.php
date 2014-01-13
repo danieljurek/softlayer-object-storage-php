@@ -25,8 +25,8 @@ class ObjectStorage_Util
 
         $directoryChunks = explode('_', $className);
 
-        $path = APPPATH . 'third_party/softlayer-storage/' . implode(DIRECTORY_SEPARATOR, $directoryChunks) . '.php';
-
+        $path = APPPATH . 'third_party/softlayer-storage/lib/' . implode(DIRECTORY_SEPARATOR, $directoryChunks) . '.php';
+        
         // Check that the file exists before ruining the rest of the scripts with cascading exceptions 
         if(file_exists($path)) {
           require_once($path);
